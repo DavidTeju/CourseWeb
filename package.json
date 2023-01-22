@@ -2,14 +2,13 @@
   "name": "courseweb",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "Scraper/scrapeCourses.ts",
   "scripts": {
-    "build and run": "tsc && node index.js",
-    "run": "node index.js",
+    "run": "ts-node Scraper/scrapeCourses.ts",
     "build": "tsc"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Tejuosho",
   "license": "ISC",
   "devDependencies": {
     "@types/jsdom": "^20.0.1",

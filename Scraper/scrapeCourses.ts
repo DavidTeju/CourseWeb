@@ -2,33 +2,40 @@ import {course} from "./courseType";
 import {JSDOM} from "jsdom";
 import {writeFile} from "fs";
 
-
 const domain = "https://bulletin.dom.edu/";
+//Breakable
 const bulletinStartPageLink = `${domain}content.php?catoid=21&navoid=3956`;
 
 fetch(bulletinStartPageLink)
-    .then(response => response.text())
+    .then((response) => response.text())
     .then(scrapeAllCourses)
-    .then(courseArray => {
+    .then((courseArray) => {
         console.log(`Processed ${courseArray.length} courses`);
-        return courseArray
+        return courseArray;
     })
     .then((courseArray) => JSON.stringify(courseArray, null, 2))
-    .then(jsonString => writeFile("allCourses.json", jsonString, () => {
-    }));
+    .then((jsonString) =>
+        writeFile("../allCourses.json", jsonString, (err) => {
+            console.log(err);
+        })
+    );
 
 function scrapeAllCourses(HTMLText: string) {
-
     const dom = new JSDOM(HTMLText);
     const document: Document = dom.window.document;
 
-    const linksToDepartmentPages = Array.from(document.querySelectorAll<HTMLAnchorElement>("a"))
-        .filter(element => element.text.startsWith("Go to information for"))
+    const linksToDepartmentPages = Array.from(
+        document.querySelectorAll<HTMLAnchorElement>("a")
+    )
+        .filter((element) => element.text.startsWith("Go to information for")) //Breakable
         .map((anchor) => domain + anchor.href);
 
-    const coursesInEachDepartment = linksToDepartmentPages.map(scrapeDepartmentCourses);
-    return Promise.all(coursesInEachDepartment)
-        .then(coursesByDepartment => coursesByDepartment.flat())
+    const coursesInEachDepartment = linksToDepartmentPages.map(
+        scrapeDepartmentCourses
+    );
+    return Promise.all(coursesInEachDepartment).then((coursesByDepartment) =>
+        coursesByDepartment.flat()
+    );
 }
 
 async function scrapeDepartmentCourses(fullLink: string) {
@@ -38,7 +45,7 @@ async function scrapeDepartmentCourses(fullLink: string) {
     const document: Document = dom.window.document;
 
     const courses = Array.from(
-        document.querySelectorAll("#courses+ul>li>a")
+        document.querySelectorAll("#courses+ul>li>a") //Breakable
     );
 
     const mappedCourses = courses
@@ -49,16 +56,15 @@ async function scrapeDepartmentCourses(fullLink: string) {
 }
 
 function extractParameters(hey: Element) {
-    const MATCH_COURSE_INFO_GET_FUNCTION = /showCourse\('(\d+)',\s*'(\d+)',\s*\w+,\s*'(.*?)'\)/gm
+    const MATCH_COURSE_INFO_GET_FUNCTION =
+        /showCourse\('(\d+)',\s*'(\d+)',\s*\w+,\s*'(.*?)'\)/gm; //Breakable
     //Capture groups are the parameters
     return Array.from(
-        hey
-            .getAttribute("onclick")!
-            .matchAll(MATCH_COURSE_INFO_GET_FUNCTION)
+        hey.getAttribute("onclick")!.matchAll(MATCH_COURSE_INFO_GET_FUNCTION)
     )[0].slice(1, 4) as [string, string, string];
 }
 
-async function scrapeCourse(
+async function scrapeCourse( //Breakable
     catalog: string,
     courseParam: string,
     display_options: string
@@ -80,15 +86,17 @@ async function scrapeCourse(
     }
 
     function extractCourseCodes(preReqString: string): string[] {
-        const MATCH_PRE_REQ_OR_PAIRS = /(?:[A-Za-z]{4} \d{3} or )*[A-Za-z]{4} \d{3}/gm;
+        const MATCH_PRE_REQ_OR_PAIRS =
+            /(?:[A-Za-z]{4} \d{3} or )*[A-Za-z]{4} \d{3}/gm;
 
-        return Array.from(
-            preReqString.matchAll(MATCH_PRE_REQ_OR_PAIRS)
-        ).map((match) => match.toString());
+        return Array.from(preReqString.matchAll(MATCH_PRE_REQ_OR_PAIRS)).map(
+            (match) => match.toString()
+        );
     }
 
-    function parseCourseData(courseInfoAsString: string)
-        : [string[], string[], string[], string] {
+    function parseCourseData(
+        courseInfoAsString: string
+    ): [string[], string[], string[], string] {
         courseInfoAsString = courseInfoAsString
             .match(MATCH_AFTER_HR)![1] //captured group
             .replace(/<br>/gm, "\n")
@@ -97,17 +105,19 @@ async function scrapeCourse(
             .replace(/(\s)+/gm, "$1") //trim repeating whitespace
             .trim();
 
-        const MATCH_PREREQUISITE_STRING = /[Pp]rerequisite\(s\):(.*?)(?:$|\.)/m
-        const MATCH_SATISFIED_REQUIREMENTS = /[Tt]his course will satisfy the core(?: area)? requirement in (.*?)(?:$|\.)/gm
+        const MATCH_PREREQUISITE_STRING = /[Pp]rerequisite\(s\):(.*?)(?:$|\.)/m;
+        const MATCH_SATISFIED_REQUIREMENTS =
+            /[Tt]his course will satisfy the core(?: area)? requirement in (.*?)(?:$|\.)/gm;
         const MATCH_ALIAS_STRING = /[Ll]isted also as(.*?)(?:$|\.)/m;
         const preReqString =
-            courseInfoAsString.match(MATCH_PREREQUISITE_STRING)?.[0] ??
-            "";
+            courseInfoAsString.match(MATCH_PREREQUISITE_STRING)?.[0] ?? "";
         const aliasString = courseInfoAsString.match(MATCH_ALIAS_STRING)?.[0] ?? "";
 
         const preReqs = extractCourseCodes(preReqString);
         const aliases = extractCourseCodes(aliasString);
-        const satisfiedRequirements = [...courseInfoAsString.matchAll(MATCH_SATISFIED_REQUIREMENTS)].map(match => match[1]);
+        const satisfiedRequirements = [
+            ...courseInfoAsString.matchAll(MATCH_SATISFIED_REQUIREMENTS),
+        ].map((match) => match[1]);
 
         const description = courseInfoAsString
             .replace(preReqString, "")
@@ -141,8 +151,3 @@ async function scrapeCourse(
         description,
     };
 }
-
-
-
-
-
