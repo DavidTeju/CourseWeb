@@ -1,4 +1,4 @@
-import array from "../data/allCourses.json"
+import * as array from "../data/allCourses.json"
 
 export function Counter(array: string[]) {
     let count: { [key: string]: number } = {};
@@ -16,10 +16,10 @@ export function getListOfWords(text: string) {
 
 export function getMostCommon() {
     const wordsMappedToFrequency = Counter(
-        array.map(course => course.description)
-            .map(description => getListOfWords(description))
-            .map(wordsList => [...new Set(wordsList)]) //Eliminate duplicate words in each course's set to ensure final frequency is frequency of courses the word appears in. High course frequency =  less usefulness in rank weights
-            .reduce((previousValue, currentValue) => previousValue.concat(currentValue))
+        array.map((course: { description: any; }) => course.description)
+            .map((description: string) => getListOfWords(description))
+            .map((wordsList: Iterable<unknown> | null | undefined) => [...new Set(wordsList)]) //Eliminate duplicate words in each course's set to ensure final frequency is frequency of courses the word appears in. High course frequency =  less usefulness in rank weights
+            .reduce((previousValue: string | any[], currentValue: any) => previousValue.concat(currentValue))
     )
 
     return Object.keys(wordsMappedToFrequency)
