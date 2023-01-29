@@ -7,9 +7,9 @@ export function Counter(array: string[]) {
 }
 
 export function getListOfWords(text: string) {
-    return text.toLowerCase()
-        .replace(/[.;,()\[\]:"\s]/gm, " ") // replace punctuation and new lines with space
-        .replace(/\s+/gm, " ") //Replace duplicate whitespace with single space
+    const removePunctuation: (input: string) => string = require('@stdlib/string-remove-punctuation')
+    return removePunctuation(text.toLowerCase())
+        .replace(/\s+/gm, " ") // replace white space (including new line) with " "
         .split(" ")
 }
 
@@ -31,4 +31,3 @@ export function getMostCommon() {
 
 //Right now, it's kind of incorrect because Very many of the courses have no description so the freq of words are less
 // than they'd actually be if all courses had proper description. Come proper data, this script will work perfectly
-console.log(getMostCommon())

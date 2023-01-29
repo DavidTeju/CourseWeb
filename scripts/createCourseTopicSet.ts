@@ -4,23 +4,20 @@ import {Counter, getListOfWords, getMostCommon} from "./commonWords";
 
 const stopwords: string[] = require("stopwords").english
 
+import * as _ from "lodash"
+
 import array from "../data/allCourses.json"
 
-
-function getCourseTopicSet(course: course){
+function getCourseTopicSet(course: course) {
     let listOfWords = getListOfWords(course.description)
 
-    listOfWords = listOfWords.filter(word => !isStopWord(word))
+    listOfWords = _.difference(listOfWords, getMostCommon())
+    listOfWords = _.difference(listOfWords, stopwords) //Holy fuck, this shit is fast AS FUCK!
 
     return Counter(listOfWords)
 }
 
-function isStopWord(word: string) {
-    if (getMostCommon().includes(word))
-        return true
-    else if (stopwords.includes(word))
-        return true
-    return false
-}
+let courseToTopicSets = array.map((course) => ({courseCode: course.courseCode, topicSet: getCourseTopicSet(course)}))
 
-console.log(getCourseTopicSet(array[50]))
+require("fs").writeFile("../data/courseTopicSets.json", JSON.stringify(courseToTopicSets, null, 2), () => {
+})
