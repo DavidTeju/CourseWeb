@@ -2,13 +2,13 @@
   "name": "courseweb",
   "version": "1.0.0",
   "description": "",
-  "main": "Scraper/scrapeCourses.ts",
+  "main": "scripts/scrapeCourses.ts",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "update": "ts-node Scraper/scrapeCourses.ts"
+    "update": "ts-node scripts/scrapeCourses.ts"
   },
   "keywords": [],
   "author": "David Tejuosho",
@@ -20,8 +20,8 @@
     "@types/node-fetch": "^2.6.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
-    "awesome-typescript-loader": "^5.2.1",
     "prettier": "^2.8.3",
+    "ts-loader": "^9.4.2",
     "typescript": "^4.9.4"
   },
   "dependencies": {
@@ -33,6 +33,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "stopwords": "^0.0.9",
     "ts-node": "^10.9.1",
     "web-vitals": "^2.1.4"
   },
