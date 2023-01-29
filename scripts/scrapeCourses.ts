@@ -15,7 +15,7 @@ fetch(bulletinStartPageLink)
     })
     .then((courseArray) => JSON.stringify(courseArray, null, 2))
     .then((jsonString) =>
-        writeFile("../allCourses.json", jsonString, (err) => {
+        writeFile("../data/allCourses.json", jsonString, (err) => {
             console.log(err);
         })
     );
