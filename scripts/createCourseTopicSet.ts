@@ -1,8 +1,8 @@
 import {course} from "./courseType";
 
-import * as _ from "lodash";
+import _ from "lodash";
 
-import * as array from "../data/allCourses.json";
+import array from "../data/allCourses.json";
 import removePunctuation from "@stdlib/string-remove-punctuation";
 
 const stopwords: string[] = require("stopwords").english;
