@@ -12,9 +12,8 @@ I was inspired by student-created tools like [Classes.wtf](https://classes.wtf/)
 that serve as super-fast(low-latency) natural language course search engines. A clean, simple UI to explore courses at my university.
 
 ## What happened?
-I wrote two scripts in TypeScript. One to scrape all courses, and info associated with them from the school academic bulletin, the second to 
-create [topic sets](https://github.com/DavidTeju/CourseWeb/blob/35223307b4e123c0618d4f45e741de1df442a101/data/courseTopicSets.json) from each
-course (this was to be useful for my search rank calculation).
+I wrote two scripts in TypeScript. One to scrape [all courses](data/allCourses.json), and info associated with them from the school academic bulletin, the second to 
+create [topic sets](/data/courseTopicSets.json) from each course (this was to be useful for my search rank calculation).
 
 However, the bulletin was missing a lot of crucial information. For example, a significant number of courses had no description in the bulletin
 This couldn't work since the course description is crucial to creating topic sets.
