@@ -3,7 +3,7 @@
 Even though this project has been abandoned, you might be curious about its purpose and history.
 
 ## The Concept Behind CourseWeb
-I was highly dissatisfied with my school's course search system, which relied on an outdated platform called Janzabar. It was slow, had a terrible user interface, and greatly limited the search options for courses. Users needed to know the exact course name or code, which made course discovery nearly impossible. To be more candid, I "hated" it. I usually harness "hate" and frustration to motivate change, and that's what I aimed to do with this project.
+I was highly dissatisfied with my school's course search system, which was a janky interface to a platform called Janzabar. It was slow, had a terrible user interface, and greatly limited the search options for courses. Users needed to know the exact course name or code, which made course discovery nearly impossible. To be more candid, I "hated" it. I usually harness "hate" and frustration to motivate change, and that's what I aimed to do with this project.
 
 I drew inspiration from student-created tools such as [Classes.wtf](https://classes.wtf/) at Harvard and [Ten Weeks](https://tenweeks.xyz/) at Stanford, which serve as fast, natural language course search engines with clean, simple user interfaces. My goal was to create a similar platform for exploring courses at my university.
 
