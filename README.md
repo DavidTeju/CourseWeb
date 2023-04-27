@@ -1,26 +1,18 @@
-# CourseWeb
+# CourseWeb: A Discontinued Project
 
-This is an abandoned project but you may wonder,
+Even though this project has been abandoned, you might be curious about its purpose and history.
 
-## What is this
-I strongly dislike my school's course search. It's based on an outdated search system called janzabar, is slow, has terrible UI, and is heavily
-restrictive in how you can search for courses; it forces you to know exactly the course name or course code of what you're looking for 
-and stifling any opportunity for course discovery. A more appropriate but, perhaps, less professional term would be "hate." And when I "hate"
-things, the first thing I do is change them, and that's what I planned to do here.
+## The Concept Behind CourseWeb
+I was highly dissatisfied with my school's course search system, which relied on an outdated platform called Janzabar. It was slow, had a terrible user interface, and greatly limited the search options for courses. Users needed to know the exact course name or code, which made course discovery nearly impossible. To be more candid, I "hated" it. I usually harness "hate" and frustration to motivate change, and that's what I aimed to do with this project.
 
-I was inspired by student-created tools like [Classes.wtf](https://classes.wtf/) at Harvard and [Ten Weeks](https://tenweeks.xyz/) at Stanford,
-that serve as super-fast(low-latency) natural language course search engines. A clean, simple UI to explore courses at my university.
+I drew inspiration from student-created tools such as [Classes.wtf](https://classes.wtf/) at Harvard and [Ten Weeks](https://tenweeks.xyz/) at Stanford, which serve as fast, natural language course search engines with clean, simple user interfaces. My goal was to create a similar platform for exploring courses at my university.
 
-## What happened?
-I wrote two scripts in TypeScript. One to scrape [all courses](data/allCourses.json), and info associated with them from the school academic bulletin, the second to 
-create [topic sets](/data/courseTopicSets.json) from each course (this was to be useful for my search rank calculation).
+## What Went Wrong?
+I developed two TypeScript scripts for the project. The first script was for scraping [all courses](data/allCourses.json) and their associated information from the school's academic bulletin, while the second script generated [topic sets](/data/courseTopicSets.json) for each course to help with search ranking calculations.
 
-However, the bulletin was missing a lot of crucial information. For example, a significant number of courses had no description in the bulletin
-This couldn't work since the course description is crucial to creating topic sets.
+However, the academic bulletin lacked crucial information, such as course descriptions for a significant number of courses. Since course descriptions are essential for creating topic sets, this posed a major problem.
 
-I arranged a meeting with my school's CIO and discussed this with him. While he thought it was a nice project, he let me know that given their
-current responsibilities, he couldn't devote resources to sharing course data with me. Additionally, he told me that the school is already
-working on transitioning to a new system. Hence, I decided to put the project on hold until the Fall.
+I discussed the issue with my school's CIO, who appreciated the project but could not allocate resources to share course data with me. He also mentioned that the school was already in the process of transitioning to a new system. Given that, I decided to pause the project until the following semester.
 
-## So why is it "abandoned?"
-That's easy. It's because I will be transferring to a different university come Fall so there's little merit to picking this back up.
+## Why is the Project "Abandoned?"
+The reason is simple: I will be transferring to another university in the Fall, so it no longer makes sense for me to continue working on this project.
